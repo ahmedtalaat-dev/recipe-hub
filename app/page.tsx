@@ -1,17 +1,29 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
-import { RecipeGrid } from '@/components/RecipeGrid';
-import { Meal } from '@/lib/types';
-import { getRandomMeal } from '@/lib/api';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { RecipeGrid } from "@/components/RecipeGrid";
+import { Meal } from "@/lib/types";
+import { getRandomMeal } from "@/lib/api";
+import Link from "next/link";
+import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [featuredMeals, setFeaturedMeals] = useState<Meal[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    if (!query.trim()) return;
+
+    router.push(`/search?q=${encodeURIComponent(query)}`);
+  };
 
   useEffect(() => {
     const loadFeaturedMeals = async () => {
@@ -27,7 +39,7 @@ export default function Home() {
         }
         setFeaturedMeals(meals);
       } catch (error) {
-        console.error('Failed to load featured meals:', error);
+        console.error("Failed to load featured meals:", error);
       } finally {
         setIsLoading(false);
       }
@@ -46,7 +58,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-br from-primary/10 to-secondary/10 py-16 md:py-24"
+          className="bg-gradient-to-br from-primary/10 to-secondary/10 py-16 md:py-24 min-h-screen"
         >
           <div className="max-w-6xl mx-auto px-4 text-center">
             <motion.h1
@@ -63,8 +75,32 @@ export default function Home() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
             >
-              Discover thousands of delicious recipes from around the world. Save your favorites and explore new culinary adventures.
+              Discover thousands of delicious recipes from around the world.
+              Save your favorites and explore new culinary adventures.
             </motion.p>
+
+            {/* Search Input */}
+            <motion.form
+            onSubmit={handleSearch}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.6 }}
+              className="max-w-2xl mx-auto mb-8"
+            >
+              <div className="relative">
+                <Search
+                  size={20}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search for recipes..."
+                  className="w-full h-14 rounded-full border border-border bg-background/90 backdrop-blur-sm pl-12 pr-4 text-foreground outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+            </motion.form>
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -146,22 +182,29 @@ export default function Home() {
               transition={{ delay: 0.6, duration: 0.6 }}
               className="grid grid-cols-2 md:grid-cols-4 gap-4"
             >
-              {['Dessert', 'Seafood', 'Pasta', 'Vegetarian', 'Asian', 'Mexican', 'Italian', 'Indian'].map(
-                (category, index) => (
-                  <Link
-                    key={category}
-                    href={`/search?q=${category.toLowerCase()}`}
-                    className="p-6 bg-background border border-border rounded-lg hover:border-primary hover:bg-muted transition-all text-center group"
-                  >
-                    <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">
-                      {['🍰', '🦐', '🍝', '🥗', '🍜', '🌮', '🍝', '🍛'][index]}
-                    </div>
-                    <p className="font-bold text-foreground group-hover:text-primary transition-colors">
-                      {category}
-                    </p>
-                  </Link>
-                )
-              )}
+              {[
+                "Dessert",
+                "Seafood",
+                "Pasta",
+                "Vegetarian",
+                "Asian",
+                "Mexican",
+                "Italian",
+                "Indian",
+              ].map((category, index) => (
+                <Link
+                  key={category}
+                  href={`/search?q=${category.toLowerCase()}`}
+                  className="p-6 bg-background border border-border rounded-lg hover:border-primary hover:bg-muted transition-all text-center group"
+                >
+                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">
+                    {["🍰", "🦐", "🍝", "🥗", "🍜", "🌮", "🍝", "🍛"][index]}
+                  </div>
+                  <p className="font-bold text-foreground group-hover:text-primary transition-colors">
+                    {category}
+                  </p>
+                </Link>
+              ))}
             </motion.div>
           </div>
         </section>
