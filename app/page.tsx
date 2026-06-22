@@ -19,6 +19,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
+  // Handle Search
   const handleSearch = (e) => {
     e.preventDefault();
 
