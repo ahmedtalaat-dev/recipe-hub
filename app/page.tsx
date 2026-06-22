@@ -13,6 +13,7 @@ import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
+  // States
   const [featuredMeals, setFeaturedMeals] = useState<Meal[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
