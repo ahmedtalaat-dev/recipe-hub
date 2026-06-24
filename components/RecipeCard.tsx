@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
 import Link from 'next/link';
 import { Meal } from '@/lib/types';
 import { useFavorites } from '@/lib/FavoritesContext';
@@ -69,7 +68,7 @@ export function RecipeCard({ meal }: RecipeCardProps) {
           {/* Favorite Button */}
           <motion.button
             onClick={handleFavoriteClick}
-            className={`w-full py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 ${
+            className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
               favorited
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted text-muted-foreground hover:bg-secondary hover:text-secondary-foreground'
@@ -84,9 +83,7 @@ export function RecipeCard({ meal }: RecipeCardProps) {
               animate={{ scale: isAnimating ? 1 : 0 }}
               transition={{ type: 'spring', stiffness: 200 }}
             >
-              <Heart
-                className={`w-5 h-5 ${favorited ? 'fill-current' : ''}`}
-              />
+
             </motion.div>
             {favorited ? 'Saved' : 'Save Recipe'}
           </motion.button>

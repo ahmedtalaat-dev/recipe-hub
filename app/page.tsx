@@ -1,42 +1,18 @@
 "use client";
 
 // Imports
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Footer } from "@/components/Footer";
-import { RecipeGrid } from "@/components/RecipeGrid";
 import { Meal } from "@/lib/types";
-import { getRandomMeal } from "@/lib/api";
 import Link from "next/link";
 import HomeSection from "@/components/home/HomeSection";
+import FeaturedRecipes from "@/components/home/FeaturedRecipes";
 
 export default function Home() {
   // States
   const [featuredMeals, setFeaturedMeals] = useState<Meal[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const loadFeaturedMeals = async () => {
-      setIsLoading(true);
-      try {
-        // Load 6 random meals for featured section
-        const meals: Meal[] = [];
-        for (let i = 0; i < 6; i++) {
-          const meal = await getRandomMeal();
-          if (meal && !meals.some((m) => m.idMeal === meal.idMeal)) {
-            meals.push(meal);
-          }
-        }
-        setFeaturedMeals(meals);
-      } catch (error) {
-        console.error("Failed to load featured meals:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadFeaturedMeals();
-  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -44,39 +20,8 @@ export default function Home() {
         <HomeSection />
 
         {/* Featured Recipes Section */}
-        <section className="py-16 md:py-24">
-          <div className="max-w-6xl mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                Featured Recipes
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                Handpicked culinary gems to inspire your next meal
-              </p>
-            </motion.div>
-
-            <RecipeGrid meals={featuredMeals} isLoading={isLoading} />
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-center mt-12"
-            >
-              <Link
-                href="/search?q=chicken"
-                className="inline-block px-8 py-3 rounded-lg bg-secondary text-secondary-foreground font-bold hover:opacity-90 transition-opacity"
-              >
-                Explore More Recipes
-              </Link>
-            </motion.div>
-          </div>
-        </section>
+        <FeaturedRecipes />
+        
 
         {/* Quick Browse Section */}
         <section className="py-16 bg-card border-y border-border">
@@ -128,8 +73,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

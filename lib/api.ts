@@ -14,10 +14,11 @@ export async function getMealById(id: string): Promise<Meal | null> {
   return data.meals?.[0] || null;
 }
 
-export async function getRandomMeal(): Promise<Meal | null> {
-  const response = await fetch(`${BASE_URL}/random.php`);
-  const data: MealSearchResult = await response.json();
-  return data.meals?.[0] || null;
+export async function getAllMeals(): Promise<Meal[]> {
+  const res = await fetch(`${BASE_URL}/search.php?s=`);
+  const data = await res.json();
+
+  return data.meals || [];
 }
 
 export async function getMealsByCategory(category: string): Promise<Meal[]> {
