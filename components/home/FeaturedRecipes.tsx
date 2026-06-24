@@ -17,7 +17,7 @@ export default function FeaturedRecipes() {
 
       try {
         const meals = await getAllMeals();
-        setFeaturedMeals(meals.slice(0, 6));
+        setFeaturedMeals(meals.slice(19, 25));
       } catch (error) {
         console.error("Failed to load featured meals:", error);
       } finally {
