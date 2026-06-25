@@ -1,4 +1,3 @@
-// Imports
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { RecipeGrid } from "@/components/RecipeGrid";
@@ -7,7 +6,6 @@ import { getAllMeals } from "@/lib/api";
 import Link from "next/link";
 
 export default function FeaturedRecipes() {
-  // States
   const [featuredMeals, setFeaturedMeals] = useState<Meal[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 

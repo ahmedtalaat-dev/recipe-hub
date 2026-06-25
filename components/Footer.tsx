@@ -21,7 +21,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/search?q=dessert" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="/search?q=pasta" className="text-muted-foreground hover:text-primary transition-colors">
                   Browse Recipes
                 </a>
               </li>
