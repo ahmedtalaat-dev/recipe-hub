@@ -18,3 +18,9 @@ export interface Ingredient {
   name: string;
   measure: string;
 }
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
