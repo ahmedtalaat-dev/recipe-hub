@@ -5,28 +5,42 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* About */}
           <div>
-            <h3 className="font-bold text-lg mb-3 text-foreground">RecipeHub</h3>
+            <h3 className="font-bold text-lg mb-3 text-foreground">
+              RecipeHub
+            </h3>
             <p className="text-muted-foreground text-sm">
-              Discover thousands of delicious recipes from around the world. Save your favorites and explore new culinary adventures.
+              Discover thousands of delicious recipes from around the world.
+              Save your favorites and explore new culinary adventures.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-3 text-foreground">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-3 text-foreground">
+              Quick Links
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="/" className="text-muted-foreground hover:text-primary transition-colors">
+                <a
+                  href="/"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Home
                 </a>
               </li>
               <li>
-                <a href="/search?q=pasta" className="text-muted-foreground hover:text-primary transition-colors">
+                <a
+                  href="/search?q=pasta"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Browse Recipes
                 </a>
               </li>
               <li>
-                <a href="/favorites" className="text-muted-foreground hover:text-primary transition-colors">
+                <a
+                  href="/favorites"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   My Favorites
                 </a>
               </li>
@@ -37,7 +51,8 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-3 text-foreground">Info</h3>
             <p className="text-muted-foreground text-sm">
-              Powered by TheMealDB API. Recipes from around the globe at your fingertips.
+              Powered by TheMealDB API. Recipes from around the globe at your
+              fingertips.
             </p>
           </div>
         </div>
@@ -47,7 +62,15 @@ export function Footer() {
             © {new Date().getFullYear()} RecipeHub. All rights reserved.
           </p>
           <p className="text-muted-foreground text-sm">
-            Built with ❤️ for food lovers everywhere
+            Built with ❤️ by{" "}
+            <a
+              className="text-primary hover:underline transition"
+              href="https://at-portfolio-35.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ahmed Talaat
+            </a>
           </p>
         </div>
       </div>
