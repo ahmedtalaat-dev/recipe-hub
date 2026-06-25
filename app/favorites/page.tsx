@@ -1,5 +1,13 @@
 import FavoritesPageContent from "@/components/favorites/FavoritesPageContent";
 import { Suspense } from "react";
+import { Metadata } from "next";
+
+// Metadata
+export const metadata: Metadata = {
+  title: "My Favorites | Recipe App",
+  description:
+    "View and manage your saved favorite recipes in one place.",
+};
 
 export default function FavoritesPage() {
   return (
