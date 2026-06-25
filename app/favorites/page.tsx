@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 // Metadata
 export const metadata: Metadata = {
-  title: "My Favorites | Recipe App",
+  title: "My Favorites | RecipeHub",
   description:
     "View and manage your saved favorite recipes in one place.",
 };
