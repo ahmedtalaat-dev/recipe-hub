@@ -1,32 +1,34 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { useFavorites } from '@/lib/FavoritesContext';
-import { Heart, Search, Moon, Sun } from 'lucide-react';
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useFavorites } from "@/lib/FavoritesContext";
+import { Heart, Search, Moon, Sun } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
 export function Navbar() {
   const { favorites } = useFavorites();
-  const [isDark, setIsDark] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
+  const router = useRouter();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    const isDarkMode = document.documentElement.classList.contains('dark');
-    setIsDark(isDarkMode);
+    setMounted(true);
   }, []);
 
   const toggleDarkMode = () => {
-    const html = document.documentElement;
-    html.classList.toggle('dark');
-    setIsDark(!isDark);
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
-    }
+
+    if (!searchQuery.trim()) return;
+
+    router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
   };
 
   return (
@@ -42,7 +44,10 @@ export function Navbar() {
             >
               🍳
             </motion.div>
-            <span className="font-bold text-xl text-foreground hidden md:inline">RecipeHub</span>
+
+            <span className="font-bold text-xl text-foreground hidden md:inline">
+              RecipeHub
+            </span>
           </Link>
 
           {/* Search Bar */}
@@ -55,6 +60,7 @@ export function Navbar() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-2 pl-10 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
               />
+
               <Search className="absolute left-3 w-5 h-5 text-muted-foreground pointer-events-none" />
             </div>
           </form>
@@ -69,9 +75,10 @@ export function Navbar() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Heart className="w-6 h-6 text-primary fill-primary" />
+
                 {favorites.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-accent text-accent-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {favorites.length > 9 ? '9+' : favorites.length}
+                    {favorites.length > 9 ? "9+" : favorites.length}
                   </span>
                 )}
               </motion.div>
@@ -85,11 +92,12 @@ export function Navbar() {
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle dark mode"
             >
-              {isDark ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
-              ) : (
-                <Moon className="w-5 h-5 text-slate-700" />
-              )}
+              {mounted &&
+                (theme === "dark" ? (
+                  <Sun className="w-5 h-5 text-yellow-500" />
+                ) : (
+                  <Moon className="w-5 h-5 text-slate-700" />
+                ))}
             </motion.button>
           </div>
         </div>
