@@ -1,5 +1,3 @@
-"use client"
-
 import HomeSection from "@/components/home/HomeSection";
 import FeaturedRecipes from "@/components/home/FeaturedRecipes";
 import QuickBrowse from "@/components/home/QuickBrowse";
