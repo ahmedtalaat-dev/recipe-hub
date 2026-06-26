@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Heart, Clock, Users, Flame } from 'lucide-react';
-import { Meal, Ingredient } from '@/lib/types';
-import { extractIngredients } from '@/lib/api';
-import { useFavorites } from '@/lib/FavoritesContext';
-import { useState } from 'react';
+import { motion } from "framer-motion";
+import { Clock, Users, Flame } from "lucide-react";
+import { Meal } from "@/lib/types";
+import { extractIngredients } from "@/lib/api";
+import { useFavorites } from "@/lib/FavoritesContext";
+import { useState } from "react";
 
 interface RecipeDetailProps {
   meal: Meal;
@@ -36,7 +36,7 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
       transition={{ duration: 0.5 }}
       className="space-y-8"
     >
-      {/* Header with Image */}
+      {/* Header */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -60,7 +60,9 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
         >
           {/* Title */}
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">{meal.strMeal}</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2">
+              {meal.strMeal}
+            </h1>
             <div className="flex gap-2">
               <span className="inline-block px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">
                 {meal.strCategory}
@@ -93,24 +95,17 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
           {/* Favorite Button */}
           <motion.button
             onClick={handleFavoriteClick}
-            className={`w-full py-3 px-4 rounded-lg font-bold transition-colors flex items-center justify-center gap-2 text-lg ${
+            className={`w-full py-3 px-4 rounded-lg font-bold transition-colors text-lg ${
               favorited
-                ? 'bg-primary text-primary-foreground hover:opacity-90'
-                : 'bg-muted text-muted-foreground hover:bg-secondary hover:text-secondary-foreground'
+                ? "bg-primary text-primary-foreground hover:opacity-90"
+                : "bg-secondary text-secondary-foreground"
             }`}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             animate={isAnimating ? { scale: [1, 1.1, 1] } : {}}
             transition={{ duration: 0.3 }}
           >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: isAnimating ? 1 : 0 }}
-              transition={{ type: 'spring', stiffness: 200 }}
-            >
-              <Heart className={`w-6 h-6 ${favorited ? 'fill-current' : ''}`} />
-            </motion.div>
-            {favorited ? 'Saved to Favorites' : 'Save to Favorites'}
+            {favorited ? "Saved to Favorites" : "Save to Favorites"}
           </motion.button>
 
           {/* Video Link */}
@@ -119,7 +114,7 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
               href={meal.strYoutube}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center py-2 px-4 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors font-medium"
+              className="block text-center py-3 px-4 rounded-lg font-bold border border-primary text-primary hover:bg-primary hover:text-white transition-colors"
             >
               Watch on YouTube
             </a>
@@ -127,7 +122,7 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
         </motion.div>
       </div>
 
-      {/* Two Column Layout for Ingredients and Instructions */}
+      {/* Ingredients and Instructions */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Ingredients */}
         <motion.div
@@ -136,7 +131,9 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-card border border-border rounded-lg p-6"
         >
-          <h2 className="text-2xl font-bold text-foreground mb-4">Ingredients</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">
+            Ingredients
+          </h2>
           <ul className="space-y-3">
             {ingredients.map((ingredient, index) => (
               <motion.li
@@ -150,8 +147,12 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
                   {index + 1}
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium text-foreground">{ingredient.name}</p>
-                  <p className="text-sm text-muted-foreground">{ingredient.measure}</p>
+                  <p className="font-medium text-foreground">
+                    {ingredient.name}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {ingredient.measure}
+                  </p>
                 </div>
               </motion.li>
             ))}
@@ -165,46 +166,28 @@ export function RecipeDetail({ meal }: RecipeDetailProps) {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="bg-card border border-border rounded-lg p-6"
         >
-          <h2 className="text-2xl font-bold text-foreground mb-4">Instructions</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">
+            Instructions
+          </h2>
           <div className="prose prose-invert max-w-none">
-            {meal.strInstructions.split('.').map((instruction, index) => (
-              instruction.trim() && (
-                <motion.p
-                  key={index}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + index * 0.05 }}
-                  className="text-muted-foreground mb-4 leading-relaxed"
-                >
-                  <span className="font-bold text-primary">{index + 1}.</span> {instruction.trim()}
-                </motion.p>
-              )
-            ))}
+            {meal.strInstructions.split(".").map(
+              (instruction, index) =>
+                instruction.trim() && (
+                  <motion.p
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 + index * 0.05 }}
+                    className="text-muted-foreground mb-4 leading-relaxed"
+                  >
+                    <span className="font-bold text-primary">{index + 1}.</span>{" "}
+                    {instruction.trim()}
+                  </motion.p>
+                ),
+            )}
           </div>
         </motion.div>
       </div>
-
-      {/* Tags */}
-      {meal.strTags && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="bg-card border border-border rounded-lg p-6"
-        >
-          <h3 className="font-bold text-foreground mb-3">Recipe Tags</h3>
-          <div className="flex flex-wrap gap-2">
-            {meal.strTags.split(',').map((tag, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm"
-              >
-                {tag.trim()}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      )}
     </motion.div>
   );
 }

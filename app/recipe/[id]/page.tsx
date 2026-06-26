@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
-import { Metadata } from 'next';
-import { getMealById } from '@/lib/api';
-import { RecipePageContent } from '@/components/search/RecipePageContent';
+import { Suspense } from "react";
+import { Metadata } from "next";
+import { getMealById } from "@/lib/api";
+import { RecipePageContent } from "@/components/search/RecipePageContent";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -11,11 +11,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const meal = await getMealById(id);
 
-  const title = meal ? `${meal.strMeal} | RecipeHub` : 'Recipe Not Found';
+  const title = meal ? `${meal.strMeal} | RecipeHub` : "Recipe Not Found";
   const description = meal
     ? `Learn how to make ${meal.strMeal}. A delicious ${meal.strCategory} recipe from ${meal.strArea} cuisine.`
-    : 'The recipe you are looking for does not exist or has been removed.';
-  const image = meal?.strMealThumb ?? '/og-default.jpg';
+    : "The recipe you are looking for does not exist or has been removed.";
+  const image = meal?.strMealThumb ?? "/og-default.jpg";
 
   return {
     title,
@@ -35,15 +35,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: image,
           width: 1200,
           height: 630,
-          alt: meal?.strMeal ?? 'Recipe',
+          alt: meal?.strMeal ?? "Recipe",
         },
       ],
-      type: 'article',
+      type: "article",
     },
 
     // Twitter card
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images: [image],

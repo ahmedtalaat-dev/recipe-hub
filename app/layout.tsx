@@ -22,14 +22,15 @@ export const metadata: Metadata = {
   title: "RecipeHub - Discover Amazing Recipes",
   description:
     "Explore thousands of recipes, save your favorites, and discover new culinary delights",
+
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/icon.png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icon-dark-32x32.png",
+        url: "/icon.png",
         media: "(prefers-color-scheme: dark)",
       },
       {
@@ -37,7 +38,34 @@ export const metadata: Metadata = {
         type: "image/svg+xml",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/icon.png",
+  },
+
+  // Open Graph (OG)
+  openGraph: {
+    title: "RecipeHub - Discover Amazing Recipes",
+    description:
+      "Explore thousands of recipes, save your favorites, and discover new culinary delights",
+    url: "https://recipe-hub-jet.vercel.app/",
+    siteName: "RecipeHub",
+    images: [
+      {
+        url: "https://recipe-hub-jet.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "RecipeHub Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "RecipeHub - Discover Amazing Recipes",
+    description:
+      "Explore thousands of recipes, save your favorites, and discover new culinary delights",
+    images: ["https://recipe-hub-jet.vercel.app/og-image.png"],
   },
 };
 

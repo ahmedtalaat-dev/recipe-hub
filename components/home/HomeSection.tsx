@@ -86,7 +86,7 @@ export default function HomeSection() {
           >
             {/* Explore Recipes Button */}
             <Link
-              href="/search?q=pizza"
+              href="/search?q=chicken"
               className="px-8 py-3 rounded-lg bg-primary text-white font-bold"
             >
               Explore Recipes

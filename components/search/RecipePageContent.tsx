@@ -1,16 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { RecipeDetail } from '@/components/RecipeDetail';
-import { Meal } from '@/lib/types';
-import { getMealById } from '@/lib/api';
-import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { RecipeDetail } from "@/components/RecipeDetail";
+import { Meal } from "@/lib/types";
+import { getMealById } from "@/lib/api";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function RecipePageContent({ id }: { id: string }) {
   const [meal, setMeal] = useState<Meal | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     if (!id) return;
@@ -21,7 +23,7 @@ export function RecipePageContent({ id }: { id: string }) {
         const result = await getMealById(id);
         setMeal(result);
       } catch (error) {
-        console.error('Failed to load meal:', error);
+        console.error("Failed to load meal:", error);
       } finally {
         setIsLoading(false);
       }
@@ -53,9 +55,12 @@ export function RecipePageContent({ id }: { id: string }) {
     return (
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">Recipe Not Found</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-4">
+            Recipe Not Found
+          </h1>
           <p className="text-muted-foreground mb-6">
-            The recipe you&apos;re looking for doesn&apos;t exist or has been removed.
+            The recipe you&apos;re looking for doesn&apos;t exist or has been
+            removed.
           </p>
           <Link
             href="/"
@@ -77,13 +82,13 @@ export function RecipePageContent({ id }: { id: string }) {
           transition={{ duration: 0.3 }}
           className="mb-8"
         >
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-primary hover:opacity-80 transition-opacity font-medium"
+          <button
+            onClick={() => router.back()}
+            className="inline-flex items-center gap-2 text-primary hover:opacity-80 transition-opacity font-medium cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
-            Back to Home
-          </Link>
+            Go Back
+          </button>
         </motion.div>
 
         <RecipeDetail meal={meal} />
