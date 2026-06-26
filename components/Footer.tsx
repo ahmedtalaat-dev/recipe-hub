@@ -62,15 +62,7 @@ export function Footer() {
             © {new Date().getFullYear()} RecipeHub. All rights reserved.
           </p>
           <p className="text-muted-foreground text-sm">
-            Built with ❤️ by{" "}
-            <a
-              className="text-primary hover:underline transition"
-              href="https://at-portfolio-35.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Ahmed Talaat
-            </a>
+            Built with ❤️ by Ahmed Talaat
           </p>
         </div>
       </div>

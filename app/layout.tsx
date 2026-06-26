@@ -46,11 +46,11 @@ export const metadata: Metadata = {
     title: "RecipeHub - Discover Amazing Recipes",
     description:
       "Explore thousands of recipes, save your favorites, and discover new culinary delights",
-    url: "https://recipe-hub-jet.vercel.app/",
+    url: "https://recipe-hub0.vercel.app/",
     siteName: "RecipeHub",
     images: [
       {
-        url: "https://recipe-hub-jet.vercel.app/og-image.png",
+        url: "https://recipe-hub0.vercel.app/og-image.png",
         width: 1200,
         height: 630,
         alt: "RecipeHub Preview",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: "RecipeHub - Discover Amazing Recipes",
     description:
       "Explore thousands of recipes, save your favorites, and discover new culinary delights",
-    images: ["https://recipe-hub-jet.vercel.app/og-image.png"],
+    images: ["https://recipe-hub0.vercel.app/og-image.png"],
   },
 };
 

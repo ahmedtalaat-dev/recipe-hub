@@ -68,7 +68,7 @@ export function Navbar() {
           {/* Right Actions */}
           <div className="flex items-center gap-4">
             {/* Favorites Badge */}
-            <Link href="/favorites">
+            <Link href="/favorites" aria-label="Favorites">
               <motion.div
                 className="relative cursor-pointer"
                 whileHover={{ scale: 1.1 }}
