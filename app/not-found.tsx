@@ -1,69 +1,50 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Home, Search, ArrowLeft } from "lucide-react";
+import { Home, Compass } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "404 | Page Not Found",
+  description:
+    "The page you are looking for could not be found. It may have been moved, removed, or never existed.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
-      <div className="text-center max-w-md">
-        
-        {/* Icon / Emoji */}
-        <motion.div
-          className="w-20 h-20 mx-auto mb-6 bg-primary rounded-2xl flex items-center justify-center text-primary-foreground text-3xl"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+    <main className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
+      <h1 className="text-6xl font-bold text-primary tracking-tight mb-2">
+        404
+      </h1>
+
+      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        Page Not Found
+      </h2>
+
+      <p className="text-lg text-muted-foreground max-w-2xl">
+        Looks like this recipe is no longer on the menu. The page may have been
+        moved, removed, or the link you followed isn't quite right.
+      </p>
+
+      <div className="mt-8 flex flex-col sm:flex-row gap-4">
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90"
         >
-          🍽️
-        </motion.div>
+          <Home className="h-5 w-5" />
+          Home
+        </Link>
 
-        {/* Title */}
-        <h1 className="text-4xl font-bold text-foreground mb-2">
-          404 - Page Not Found
-        </h1>
-
-        {/* Subtitle */}
-        <p className="text-muted-foreground mb-6">
-          Oops! The page you’re looking for doesn’t exist or has been moved.
-        </p>
-
-        {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-
-          <Link href="/">
-            <motion.div
-              className="flex items-center justify-center gap-2 px-5 py-2 rounded-lg bg-primary text-primary-foreground font-bold hover:opacity-90 transition"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Home className="w-4 h-4" />
-              Home
-            </motion.div>
-          </Link>
-
-          <Link href="/search">
-            <motion.div
-              className="flex items-center justify-center gap-2 px-5 py-2 rounded-lg border border-border bg-card text-foreground font-bold hover:bg-muted transition"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Search className="w-4 h-4" />
-              Search Recipes
-            </motion.div>
-          </Link>
-
-        </div>
-
-        {/* Back */}
-        <button
-          onClick={() => window.history.back()}
-          className="mt-6 text-sm text-muted-foreground hover:text-foreground flex items-center justify-center gap-1 mx-auto"
+        <Link
+          href="/search?q=chicken"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-6 py-3 font-medium text-foreground transition-colors hover:bg-muted"
         >
-          <ArrowLeft className="w-4 h-4" />
-          Go Back
-        </button>
+          <Compass className="h-5 w-5" />
+          Explore Recipes
+        </Link>
       </div>
-    </div>
+    </main>
   );
 }
