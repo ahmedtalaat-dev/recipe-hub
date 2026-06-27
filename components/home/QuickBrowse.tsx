@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 const browseCategories = [
   {
-    name: "Dessert",
-    emoji: "🍰",
+    name: "Pizza",
+    emoji: "🍕",
   },
   {
     name: "Seafood",
@@ -21,20 +21,20 @@ const browseCategories = [
     emoji: "🥗",
   },
   {
-    name: "Asian",
-    emoji: "🍜",
+    name: "Rice",
+    emoji: "🍚",
   },
   {
-    name: "Mexican",
-    emoji: "🌮",
+    name: "Ice Cream",
+    emoji: "🍦",
   },
   {
-    name: "Italian",
-    emoji: "🍝",
+    name: "Soup",
+    emoji: "🥣",
   },
   {
-    name: "Indian",
-    emoji: "🍛",
+    name: "Salad",
+    emoji: "🥗",
   },
 ];
 
