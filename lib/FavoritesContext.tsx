@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Meal } from './types';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { Meal } from "./types";
 
 interface FavoritesContextType {
   favorites: Meal[];
@@ -10,7 +10,9 @@ interface FavoritesContextType {
   isFavorite: (mealId: string) => boolean;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(
+  undefined,
+);
 
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   const [favorites, setFavorites] = useState<Meal[]>([]);
@@ -18,12 +20,12 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
 
   // Load from localStorage on mount
   useEffect(() => {
-    const stored = localStorage.getItem('recipe-favorites');
+    const stored = localStorage.getItem("recipe-favorites");
     if (stored) {
       try {
         setFavorites(JSON.parse(stored));
       } catch (error) {
-        console.error('Failed to load favorites:', error);
+        console.error("Failed to load favorites:", error);
       }
     }
     setIsHydrated(true);
@@ -32,7 +34,7 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   // Save to localStorage whenever favorites change
   useEffect(() => {
     if (isHydrated) {
-      localStorage.setItem('recipe-favorites', JSON.stringify(favorites));
+      localStorage.setItem("recipe-favorites", JSON.stringify(favorites));
     }
   }, [favorites, isHydrated]);
 
@@ -54,7 +56,9 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, isFavorite }}>
+    <FavoritesContext.Provider
+      value={{ favorites, addFavorite, removeFavorite, isFavorite }}
+    >
       {children}
     </FavoritesContext.Provider>
   );
@@ -63,7 +67,7 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
 export function useFavorites() {
   const context = useContext(FavoritesContext);
   if (context === undefined) {
-    throw new Error('useFavorites must be used within FavoritesProvider');
+    throw new Error("useFavorites must be used within FavoritesProvider");
   }
   return context;
 }
